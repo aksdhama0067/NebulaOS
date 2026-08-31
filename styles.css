@@ -1,0 +1,172 @@
+:root {
+      color-scheme: dark;
+      --surface: rgba(20, 27, 43, .80);
+      --surface-solid: #171e2d;
+      --surface-soft: rgba(255,255,255,.075);
+      --text: #f6f8ff;
+      --muted: #a9b2c9;
+      --accent: #77a8ff;
+      --accent-2: #b799ff;
+      --border: rgba(255,255,255,.14);
+      --shadow: 0 24px 60px rgba(0,0,0,.34);
+      --danger: #ff6f84;
+      --ok: #68e0ad;
+    }
+    body.light {
+      color-scheme: light;
+      --surface: rgba(248, 250, 255, .82);
+      --surface-solid: #f4f6fc;
+      --surface-soft: rgba(17, 31, 58, .07);
+      --text: #142037;
+      --muted: #60708c;
+      --accent: #316ee8;
+      --accent-2: #7b52e6;
+      --border: rgba(24, 43, 78, .15);
+      --shadow: 0 24px 60px rgba(31, 48, 78, .20);
+    }
+    body.accent-violet { --accent: #aa7bff; --accent-2: #e08bff; }
+    body.accent-mint { --accent: #42c9a1; --accent-2: #45aee8; }
+    body.accent-sunset { --accent: #f18065; --accent-2: #cf5fbd; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { background: #0c1120; color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    button, input, textarea { font: inherit; }
+    button { color: inherit; }
+    button:focus-visible, input:focus-visible, textarea:focus-visible, [contenteditable]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    #desktop { position: relative; width: 100%; height: 100%; isolation: isolate; overflow: hidden; background: #172242; transition: background .35s ease; }
+    #desktop::before, #desktop::after { content: ""; position: absolute; pointer-events: none; inset: 0; z-index: -1; }
+    #desktop::after { background: linear-gradient(115deg, rgba(255,255,255,.08), transparent 43%); mix-blend-mode: overlay; }
+    #desktop.wallpaper-aurora { background: radial-gradient(circle at 12% 10%, #62ceb6 0, transparent 29%), radial-gradient(circle at 88% 16%, #7554d8 0, transparent 30%), radial-gradient(circle at 50% 100%, #0e8ab2 0, transparent 42%), linear-gradient(145deg, #152852, #20225b 50%, #102d46); }
+    #desktop.wallpaper-dusk { background: radial-gradient(circle at 80% 12%, #fcbd77 0, transparent 23%), radial-gradient(circle at 25% 80%, #5c549d 0, transparent 44%), linear-gradient(150deg, #1b1535, #573354 53%, #123047); }
+    #desktop.wallpaper-ocean { background: radial-gradient(circle at 15% 12%, #3dbbc8 0, transparent 28%), radial-gradient(circle at 84% 80%, #0c5d96 0, transparent 45%), linear-gradient(135deg, #071f4a, #0e506c 52%, #19286f); }
+    #desktop.wallpaper-mono { background: radial-gradient(circle at 72% 20%, #677185 0, transparent 28%), linear-gradient(145deg, #111827, #323a4b 53%, #171a27); }
+    .desktop-icons { position: absolute; top: 18px; left: 14px; bottom: 82px; width: 106px; display: flex; align-content: flex-start; flex-wrap: wrap; gap: 10px 4px; }
+    .desktop-icon { width: 102px; min-height: 94px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; gap: 5px; color: #fff; text-shadow: 0 1px 3px #000; border: 1px solid transparent; background: transparent; border-radius: 10px; cursor: default; user-select: none; touch-action: none; }
+    .desktop-icon:hover, .desktop-icon.selected { background: rgba(235,244,255,.16); border-color: rgba(255,255,255,.25); }
+    .app-symbol { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 13px; font-size: 24px; line-height: 1; background: linear-gradient(135deg, rgba(255,255,255,.94), rgba(206,218,255,.7)); box-shadow: 0 7px 17px rgba(0,0,0,.25); text-shadow: none; }
+    .desktop-icon span:last-child { width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 12px; }
+    .window-layer { position: absolute; inset: 0 0 62px; pointer-events: none; }
+    .window { position: absolute; display: flex; flex-direction: column; min-width: 290px; min-height: 185px; width: 620px; height: 430px; overflow: hidden; pointer-events: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); backdrop-filter: blur(24px) saturate(130%); -webkit-backdrop-filter: blur(24px) saturate(130%); transition: box-shadow .15s ease, border-radius .2s ease; }
+    .window.focused { box-shadow: 0 28px 70px rgba(0,0,0,.46), 0 0 0 1px rgba(151,187,255,.22); }
+    .window.maximized { top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border-radius: 0; }
+    .window.minimized { display: none; }
+    .titlebar { height: 39px; flex: 0 0 39px; display: flex; align-items: center; gap: 9px; padding: 0 8px 0 12px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.025); cursor: move; user-select: none; touch-action: none; }
+    .window-title-icon { font-size: 15px; }
+    .window-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 650; letter-spacing: .01em; }
+    .window-controls { display: flex; gap: 3px; }
+    .window-controls button { width: 27px; height: 25px; border: 0; border-radius: 7px; background: transparent; cursor: pointer; font-size: 16px; line-height: 1; }
+    .window-controls button:hover { background: var(--surface-soft); }
+    .window-controls .close:hover { color: white; background: var(--danger); }
+    .window-content { position: relative; flex: 1; min-height: 0; overflow: auto; }
+    .resize-handle { position: absolute; z-index: 4; }
+    .resize-handle.n, .resize-handle.s { height: 7px; left: 8px; right: 8px; cursor: ns-resize; }
+    .resize-handle.n { top: -3px; } .resize-handle.s { bottom: -3px; }
+    .resize-handle.e, .resize-handle.w { width: 7px; top: 8px; bottom: 8px; cursor: ew-resize; }
+    .resize-handle.e { right: -3px; } .resize-handle.w { left: -3px; }
+    .resize-handle.ne, .resize-handle.nw, .resize-handle.se, .resize-handle.sw { width: 12px; height: 12px; }
+    .resize-handle.ne { top: -4px; right: -4px; cursor: nesw-resize; } .resize-handle.nw { top: -4px; left: -4px; cursor: nwse-resize; }
+    .resize-handle.se { bottom: -4px; right: -4px; cursor: nwse-resize; } .resize-handle.sw { bottom: -4px; left: -4px; cursor: nesw-resize; }
+    #taskbar { position: absolute; z-index: 5000; bottom: 0; left: 0; right: 0; height: 62px; display: flex; align-items: center; gap: 7px; padding: 8px 12px; color: var(--text); border-top: 1px solid var(--border); background: rgba(16,22,35,.65); backdrop-filter: blur(22px) saturate(135%); -webkit-backdrop-filter: blur(22px) saturate(135%); }
+    body.light #taskbar { background: rgba(245,248,255,.70); }
+    .taskbar-button, .task-button { flex: 0 0 auto; height: 42px; border: 1px solid transparent; border-radius: 12px; background: transparent; cursor: pointer; }
+    .taskbar-button { width: 42px; display: grid; place-items: center; font-size: 20px; }
+    .taskbar-button:hover, .task-button:hover, .task-button.active { background: var(--surface-soft); border-color: var(--border); }
+    #start-button { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; box-shadow: 0 5px 14px rgba(78,119,220,.27); }
+    #task-list { display: flex; align-items: center; gap: 4px; min-width: 0; flex: 1; overflow-x: auto; scrollbar-width: none; }
+    #task-list::-webkit-scrollbar { display: none; }
+    .task-button { display: flex; align-items: center; gap: 7px; max-width: 164px; padding: 0 11px; font-size: 13px; }
+    .task-button .task-title { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .task-button.open::after { content: ""; width: 4px; height: 4px; position: absolute; align-self: flex-end; margin-bottom: 4px; border-radius: 999px; background: var(--accent); }
+    .tray { display: flex; align-items: center; gap: 9px; padding-left: 8px; font-size: 12px; white-space: nowrap; }
+    .tray-button { position: relative; width: 27px; height: 31px; padding: 0; border: 0; border-radius: 7px; background: transparent; cursor: pointer; font-size: 17px; }
+    .tray-button:hover { background: var(--surface-soft); }
+    .tray-button i { width: 7px; height: 7px; position: absolute; top: 4px; right: 3px; border: 1px solid var(--surface-solid); border-radius: 50%; background: var(--danger); }
+    .tray-status { color: var(--muted); font-size: 16px; }
+    #clock { min-width: 76px; text-align: right; font-variant-numeric: tabular-nums; }
+    .start-menu { position: absolute; z-index: 6000; bottom: 71px; left: 12px; width: 310px; padding: 12px; border: 1px solid var(--border); border-radius: 17px; background: var(--surface); box-shadow: var(--shadow); backdrop-filter: blur(28px) saturate(150%); display: none; }
+    .start-menu.open { display: block; animation: rise .16s ease-out; }
+    .notification-center { position: absolute; z-index: 6000; right: 12px; bottom: 71px; width: min(340px, calc(100vw - 24px)); display: none; overflow: hidden; border: 1px solid var(--border); border-radius: 17px; background: var(--surface); box-shadow: var(--shadow); backdrop-filter: blur(28px) saturate(150%); }
+    .notification-center.open { display: block; animation: rise .16s ease-out; }
+    .notification-head { display: flex; align-items: center; justify-content: space-between; padding: 12px; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .notification-list { max-height: 310px; overflow: auto; padding: 7px; }
+    .notification-item { padding: 10px; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .notification-item:last-child { border-bottom: 0; }
+    .notification-item time { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .notification-empty { padding: 22px 12px; margin: 0; color: var(--muted); text-align: center; font-size: 13px; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+    .start-heading { display: flex; align-items: center; justify-content: space-between; margin: 4px 5px 11px; font-size: 13px; color: var(--muted); }
+    .app-search { display: flex; align-items: center; gap: 7px; margin: 0 1px 10px; padding: 0 9px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-soft); color: var(--muted); }
+    .app-search input { min-width: 0; width: 100%; padding: 8px 0; border: 0; outline: 0; color: var(--text); background: transparent; font-size: 13px; }
+    .app-search input::placeholder { color: var(--muted); }
+    .menu-apps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .menu-app { display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid transparent; border-radius: 10px; background: transparent; text-align: left; cursor: pointer; }
+    .menu-app:hover { background: var(--surface-soft); border-color: var(--border); }
+    .menu-app .app-symbol { width: 31px; height: 31px; border-radius: 9px; font-size: 17px; }
+    .menu-app small { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; }
+    .menu-footer { margin-top: 12px; padding: 8px 5px 1px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+    .mini-btn, .toolbar-btn { border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft); cursor: pointer; }
+    .mini-btn { padding: 6px 9px; font-size: 12px; }
+    .mini-btn:hover, .toolbar-btn:hover { border-color: var(--accent); background: rgba(113,157,255,.15); }
+    .app-toolbar { display: flex; align-items: center; gap: 7px; min-height: 48px; padding: 8px 10px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.025); }
+    .app-toolbar .spacer { flex: 1; }
+    .input { width: 100%; color: var(--text); border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft); padding: 7px 9px; }
+    .input::placeholder { color: var(--muted); }
+    .notepad { height: 100%; display: flex; flex-direction: column; }
+    .notepad-filename { max-width: 210px; }
+    .format-group { display: flex; gap: 3px; padding-right: 7px; margin-right: 2px; border-right: 1px solid var(--border); }
+    .toolbar-btn { min-width: 28px; height: 29px; padding: 0 7px; font-weight: 650; }
+    .editor { flex: 1; min-height: 100px; overflow: auto; padding: 18px 20px; outline: 0; line-height: 1.55; white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; font-size: 14px; user-select: text; }
+    .editor:empty::before { content: attr(data-placeholder); color: var(--muted); pointer-events: none; }
+    .notepad-status { display: flex; justify-content: space-between; padding: 4px 10px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; }
+    .calculator { height: 100%; min-width: 0; display: flex; flex-direction: column; padding: 12px; gap: 9px; background: linear-gradient(135deg, rgba(255,255,255,.03), transparent); }
+    .calc-display { width: 100%; min-height: 78px; overflow: hidden; text-align: right; border: 1px solid var(--border); border-radius: 12px; background: rgba(0,0,0,.12); padding: 10px 12px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .calc-history { height: 19px; overflow: hidden; color: var(--muted); font-size: 12px; white-space: nowrap; text-overflow: ellipsis; }
+    .calc-value { overflow-x: auto; font-size: clamp(22px, 3.5vw, 34px); line-height: 1.1; white-space: nowrap; scrollbar-width: none; }
+    .calc-value::-webkit-scrollbar { display: none; }
+    .calc-keypad { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; }
+    .calc-key { min-height: 37px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-soft); cursor: pointer; font-weight: 600; }
+    .calc-key:hover { background: rgba(122,164,255,.20); border-color: rgba(143,182,255,.58); }
+    .calc-key.operator { color: #b7cdff; background: rgba(102,144,236,.16); }
+    .calc-key.equal { color: white; background: linear-gradient(135deg, #4d85f5, #7454dd); border-color: transparent; }
+    .terminal { height: 100%; display: flex; flex-direction: column; background: #07100d; color: #b8f7cd; font: 13px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    body.light .terminal { background: #0d1a15; }
+    .terminal-output { flex: 1; min-height: 0; overflow: auto; padding: 14px; white-space: pre-wrap; word-break: break-word; user-select: text; }
+    .terminal-line { margin-bottom: 5px; }
+    .terminal-prompt { display: flex; gap: 8px; padding: 10px 14px; border-top: 1px solid rgba(166,251,190,.18); }
+    .terminal-prompt label { color: #68e0ad; white-space: nowrap; }
+    .terminal-input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: #e5ffec; font: inherit; }
+    .file-manager { height: 100%; display: flex; flex-direction: column; }
+    .file-path { flex: 1; min-width: 0; color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 13px; }
+    .file-grid { flex: 1; overflow: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(116px, 1fr)); align-content: start; gap: 8px; padding: 13px; }
+    .file-item { min-height: 101px; padding: 10px 7px; display: flex; flex-direction: column; align-items: center; gap: 7px; border: 1px solid transparent; border-radius: 10px; background: transparent; cursor: pointer; color: var(--text); }
+    .file-item:hover, .file-item.selected { background: var(--surface-soft); border-color: var(--border); }
+    .file-icon { font-size: 32px; line-height: 1; }
+    .file-name { width: 100%; overflow: hidden; font-size: 12px; text-align: center; white-space: nowrap; text-overflow: ellipsis; }
+    .file-meta { color: var(--muted); font-size: 10px; }
+    .file-empty { grid-column: 1/-1; align-self: center; margin-top: 48px; color: var(--muted); text-align: center; }
+    .settings { height: 100%; overflow: auto; padding: 20px; }
+    .settings h2 { margin: 0 0 18px; font-size: 20px; }
+    .settings-section { margin: 0 0 24px; }
+    .settings-section h3 { margin: 0 0 10px; font-size: 13px; color: var(--muted); font-weight: 650; text-transform: uppercase; letter-spacing: .07em; }
+    .wallpaper-options { display: grid; grid-template-columns: repeat(4, minmax(85px, 1fr)); gap: 10px; }
+    .accent-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+    .accent-choice { height: 42px; border: 2px solid transparent; border-radius: 9px; cursor: pointer; color: white; font-size: 11px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+    .accent-choice:hover, .accent-choice.selected { border-color: white; box-shadow: 0 0 0 2px var(--accent); }
+    .accent-choice.azure { background: linear-gradient(135deg, #77a8ff, #b799ff); }.accent-choice.violet { background: linear-gradient(135deg, #aa7bff, #e08bff); }.accent-choice.mint { background: linear-gradient(135deg, #42c9a1, #45aee8); }.accent-choice.sunset { background: linear-gradient(135deg, #f18065, #cf5fbd); }
+    .wallpaper-choice { height: 76px; position: relative; overflow: hidden; border: 2px solid transparent; border-radius: 11px; cursor: pointer; }
+    .wallpaper-choice:hover, .wallpaper-choice.selected { border-color: var(--accent); }
+    .wallpaper-choice::after { content: attr(data-label); position: absolute; inset: auto 0 0; padding: 16px 6px 5px; text-align: center; color: white; font-size: 11px; font-weight: 650; text-shadow: 0 1px 3px #000; background: linear-gradient(transparent, rgba(0,0,0,.65)); }
+    .wallpaper-choice.aurora { background: radial-gradient(circle at 10% 10%, #62ceb6, transparent 43%), #242b70; }.wallpaper-choice.dusk { background: radial-gradient(circle at 80% 10%, #fcbd77, transparent 35%), #532d57; }.wallpaper-choice.ocean { background: radial-gradient(circle at 15% 12%, #3dbbc8, transparent 36%), #0b436d; }.wallpaper-choice.mono { background: radial-gradient(circle at 72% 20%, #777f8e, transparent 37%), #202530; }
+    .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid var(--border); }
+    .setting-row:first-of-type { border-top: 0; }
+    .setting-row p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .switch { position: relative; width: 45px; height: 25px; flex: 0 0 auto; border: 0; border-radius: 99px; background: #60708c; cursor: pointer; transition: background .2s; }
+    .switch::after { content: ""; width: 19px; height: 19px; position: absolute; top: 3px; left: 3px; border-radius: 50%; background: white; transition: transform .2s; }
+    .switch.on { background: var(--accent); }.switch.on::after { transform: translateX(20px); }
+    .system-info { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .system-info div { padding: 10px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }.system-info div:nth-child(2n) { border-right: 0; }.system-info div:nth-last-child(-n+2) { border-bottom: 0; }
+    .system-info span { display: block; color: var(--muted); font-size: 11px; }.system-info strong { display: block; margin-top: 3px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .toast-area { position: absolute; z-index: 7000; right: 16px; bottom: 74px; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+    .toast { max-width: 300px; padding: 11px 13px; color: var(--text); border: 1px solid var(--border); border-radius: 10px; background: var(--surface-solid); box-shadow: 0 12px 30px rgba(0,0,0,.25); font-size: 13px; animation: toast-in .2s ease-out; }
+    @keyframes toast-in { from { opacity: 0; transform: translateX(15px); } to { opacity: 1; transform: none; } }
+    @media (max-width: 650px) { .desktop-icons { top: 8px; left: 5px; width: 76px; gap: 2px; }.desktop-icon { width: 72px; min-height: 76px; font-size: 10px; }.app-symbol { width: 36px; height: 36px; font-size: 20px; }.window-layer { bottom: 56px; }.window { min-width: 0; min-height: 160px; border-radius: 9px; }.titlebar { height: 36px; flex-basis: 36px; }.window-controls button { width: 28px; }.window .resize-handle { display: none; } #taskbar { height: 56px; padding: 7px; gap: 3px; }.taskbar-button { width: 38px; height: 38px; }.task-button { width: 38px; padding: 0; justify-content: center; }.task-button .task-title { display: none; }.task-button.open::after { margin-bottom: 2px; }.tray { gap: 5px; padding-left: 3px; }.tray-status { display: none; } #clock { min-width: 66px; font-size: 11px; }.start-menu { bottom: 63px; left: 6px; width: min(310px, calc(100vw - 12px)); }.menu-apps { grid-template-columns: 1fr; }.app-toolbar { flex-wrap: wrap; }.format-group { border-right: 0; }.notepad-filename { max-width: 130px; }.wallpaper-options { grid-template-columns: repeat(2, 1fr); } }
