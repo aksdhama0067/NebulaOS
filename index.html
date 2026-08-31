@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101624">
+  <title>Nebula OS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="desktop" class="wallpaper-aurora" aria-label="Nebula OS desktop">
+    <section id="desktop-icons" class="desktop-icons" aria-label="Desktop applications"></section>
+    <section id="window-layer" class="window-layer" aria-label="Open windows"></section>
+    <section id="toast-area" class="toast-area" aria-live="polite"></section>
+    <section id="start-menu" class="start-menu" aria-label="Start menu">
+      <div class="start-heading"><span>Applications</span><span>Nebula OS</span></div>
+      <label class="app-search"><span aria-hidden="true">⌕</span><input id="app-search" type="search" placeholder="Search apps…" autocomplete="off" aria-label="Search applications"></label>
+      <div id="menu-apps" class="menu-apps"></div> 
+      <div class="menu-footer"><span>Local-first desktop</span><button id="menu-theme" class="mini-btn" type="button">Toggle theme</button></div>
+    </section>
+    <section id="notification-center" class="notification-center" aria-label="Notifications">
+      <div class="notification-head"><strong>Notifications</strong><button id="clear-notifications" class="mini-btn" type="button">Clear</button></div>
+      <div id="notification-list" class="notification-list"><p class="notification-empty">You’re all caught up.</p></div>
+    </section>
+    <footer id="taskbar">
+      <button id="start-button" class="taskbar-button" type="button" title="Start menu" aria-label="Open Start menu">✦</button>
+      <div id="task-list" aria-label="Open applications"></div>
+      <div class="tray" aria-label="System tray"><button id="notification-button" class="tray-button" type="button" title="Notifications" aria-label="Open notifications">♧<i id="notification-badge" hidden></i></button><span class="tray-status" title="Wi-Fi connected">◔</span><span class="tray-status" title="Sound on">◖</span><span id="battery" title="Simulated battery">▰ 87%</span><time id="clock"></time></div>
+    </footer>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>
+
